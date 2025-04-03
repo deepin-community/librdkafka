@@ -1,7 +1,7 @@
 /*
  * librdkafka - Apache Kafka C library
  *
- * Copyright (c) 2020, Magnus Edenhill
+ * Copyright (c) 2020-2022, Magnus Edenhill
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,19 +41,18 @@ static int rebalance_cnt;
 static rd_kafka_resp_err_t rebalance_exp_event;
 static rd_kafka_resp_err_t commit_exp_err;
 
-static void rebalance_cb (rd_kafka_t *rk,
-                          rd_kafka_resp_err_t err,
-                          rd_kafka_topic_partition_list_t *parts,
-                          void *opaque) {
+static void rebalance_cb(rd_kafka_t *rk,
+                         rd_kafka_resp_err_t err,
+                         rd_kafka_topic_partition_list_t *parts,
+                         void *opaque) {
 
         rebalance_cnt++;
-        TEST_SAY("Rebalance #%d: %s: %d partition(s)\n",
-                 rebalance_cnt, rd_kafka_err2name(err), parts->cnt);
+        TEST_SAY("Rebalance #%d: %s: %d partition(s)\n", rebalance_cnt,
+                 rd_kafka_err2name(err), parts->cnt);
 
-        TEST_ASSERT(err == rebalance_exp_event,
-                    "Expected rebalance event %s, not %s",
-                    rd_kafka_err2name(rebalance_exp_event),
-                    rd_kafka_err2name(err));
+        TEST_ASSERT(
+            err == rebalance_exp_event, "Expected rebalance event %s, not %s",
+            rd_kafka_err2name(rebalance_exp_event), rd_kafka_err2name(err));
 
         if (err == RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS) {
                 test_consumer_assign("assign", rk, parts);
@@ -74,7 +73,7 @@ static void rebalance_cb (rd_kafka_t *rk,
                         rd_sleep(1);
 
                         commit_err = rd_kafka_commit(
-                                rk, parts, !strcmp(commit_type, "async"));
+                            rk, parts, !strcmp(commit_type, "async"));
 
                         if (!strcmp(commit_type, "async"))
                                 TEST_ASSERT(!commit_err,
@@ -82,15 +81,16 @@ static void rebalance_cb (rd_kafka_t *rk,
                                             "but it returned %s",
                                             rd_kafka_err2name(commit_err));
                         else
-                                TEST_ASSERT(commit_err == commit_exp_err ||
-                                            (!commit_exp_err &&
-                                             commit_err ==
+                                TEST_ASSERT(
+                                    commit_err == commit_exp_err ||
+                                        (!commit_exp_err &&
+                                         commit_err ==
                                              RD_KAFKA_RESP_ERR__NO_OFFSET),
-                                            "Expected %s commit to return %s, "
-                                            "not %s",
-                                            commit_type,
-                                            rd_kafka_err2name(commit_exp_err),
-                                            rd_kafka_err2name(commit_err));
+                                    "Expected %s commit to return %s, "
+                                    "not %s",
+                                    commit_type,
+                                    rd_kafka_err2name(commit_exp_err),
+                                    rd_kafka_err2name(commit_err));
                 }
 
                 test_consumer_unassign("unassign", rk);
@@ -106,14 +106,15 @@ static void rebalance_cb (rd_kafka_t *rk,
 /**
  * @brief Wait for an expected rebalance event, or fail.
  */
-static void expect_rebalance (const char *what, rd_kafka_t *c,
-                              rd_kafka_resp_err_t exp_event,
-                              int timeout_s) {
+static void expect_rebalance(const char *what,
+                             rd_kafka_t *c,
+                             rd_kafka_resp_err_t exp_event,
+                             int timeout_s) {
         int64_t tmout = test_clock() + (timeout_s * 1000000);
         int start_cnt = rebalance_cnt;
 
-        TEST_SAY("Waiting for %s (%s) for %ds\n",
-                 what, rd_kafka_err2name(exp_event), timeout_s);
+        TEST_SAY("Waiting for %s (%s) for %ds\n", what,
+                 rd_kafka_err2name(exp_event), timeout_s);
 
         rebalance_exp_event = exp_event;
 
@@ -127,8 +128,8 @@ static void expect_rebalance (const char *what, rd_kafka_t *c,
                 return;
         }
 
-        TEST_FAIL("Timed out waiting for %s (%s)\n",
-                  what, rd_kafka_err2name(exp_event));
+        TEST_FAIL("Timed out waiting for %s (%s)\n", what,
+                  rd_kafka_err2name(exp_event));
 }
 
 
@@ -137,16 +138,16 @@ static void expect_rebalance (const char *what, rd_kafka_t *c,
  *
  * @param use_commit_type "auto", "sync" (manual), "async" (manual)
  */
-static void do_test_session_timeout (const char *use_commit_type) {
+static void do_test_session_timeout(const char *use_commit_type) {
         const char *bootstraps;
         rd_kafka_mock_cluster_t *mcluster;
         rd_kafka_conf_t *conf;
         rd_kafka_t *c;
         const char *groupid = "mygroup";
-        const char *topic = "test";
+        const char *topic   = "test";
 
         rebalance_cnt = 0;
-        commit_type = use_commit_type;
+        commit_type   = use_commit_type;
 
         SUB_TEST0(!strcmp(use_commit_type, "sync") /*quick*/,
                   "Test session timeout with %s commit", use_commit_type);
@@ -156,10 +157,8 @@ static void do_test_session_timeout (const char *use_commit_type) {
         rd_kafka_mock_coordinator_set(mcluster, "group", groupid, 1);
 
         /* Seed the topic with messages */
-        test_produce_msgs_easy_v(topic, 0, 0, 0, 100, 10,
-                                 "bootstrap.servers", bootstraps,
-                                 "batch.num.messages", "10",
-                                 NULL);
+        test_produce_msgs_easy_v(topic, 0, 0, 0, 100, 10, "bootstrap.servers",
+                                 bootstraps, "batch.num.messages", "10", NULL);
 
         test_conf_init(&conf, NULL, 30);
         test_conf_set(conf, "bootstrap.servers", bootstraps);
@@ -170,45 +169,53 @@ static void do_test_session_timeout (const char *use_commit_type) {
         test_conf_set(conf, "auto.offset.reset", "earliest");
         test_conf_set(conf, "enable.auto.commit",
                       !strcmp(commit_type, "auto") ? "true" : "false");
+        rd_kafka_mock_set_group_consumer_session_timeout_ms(mcluster, 1000);
+        rd_kafka_mock_set_group_consumer_heartbeat_interval_ms(mcluster, 100);
 
         c = test_create_consumer(groupid, rebalance_cb, conf, NULL);
 
         test_consumer_subscribe(c, topic);
 
-        /* Let Heartbeats fail after a couple of successful ones */
-        rd_kafka_mock_push_request_errors(
-                mcluster, RD_KAFKAP_Heartbeat,
-                9,
-                RD_KAFKA_RESP_ERR_NO_ERROR,
-                RD_KAFKA_RESP_ERR_NO_ERROR,
-                RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
-                RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
-                RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
-                RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
-                RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
-                RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
-                RD_KAFKA_RESP_ERR_NOT_COORDINATOR);
+        if (test_consumer_group_protocol_classic()) {
+                /* Let Heartbeats fail after a couple of successful ones */
+                rd_kafka_mock_push_request_errors(
+                    mcluster, RD_KAFKAP_Heartbeat, 9,
+                    RD_KAFKA_RESP_ERR_NO_ERROR, RD_KAFKA_RESP_ERR_NO_ERROR,
+                    RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
+                    RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
+                    RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
+                    RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
+                    RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
+                    RD_KAFKA_RESP_ERR_NOT_COORDINATOR,
+                    RD_KAFKA_RESP_ERR_NOT_COORDINATOR);
+        }
 
         expect_rebalance("initial assignment", c,
-                         RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS, 5+2);
+                         RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS, 5 + 2);
 
         /* Consume a couple of messages so that we have something to commit */
         test_consumer_poll("consume", c, 0, -1, 0, 10, NULL);
+
+        if (!test_consumer_group_protocol_classic()) {
+                /* Increase HB interval so member is fenced from the group */
+                rd_kafka_mock_set_group_consumer_heartbeat_interval_ms(mcluster,
+                                                                       2000);
+        }
 
         /* The commit in the rebalance callback should fail when the
          * member has timed out from the group. */
         commit_exp_err = RD_KAFKA_RESP_ERR_UNKNOWN_MEMBER_ID;
 
         expect_rebalance("session timeout revoke", c,
-                         RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS, 2+5+2);
+                         RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS, 2 + 5 + 2);
 
         expect_rebalance("second assignment", c,
-                         RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS, 5+2);
+                         RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS, 5 + 2);
 
         /* Final rebalance in close().
          * Its commit will work. */
         rebalance_exp_event = RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS;
-        commit_exp_err = RD_KAFKA_RESP_ERR_NO_ERROR;
+        commit_exp_err      = RD_KAFKA_RESP_ERR_NO_ERROR;
 
         test_consumer_close(c);
 
@@ -223,13 +230,13 @@ static void do_test_session_timeout (const char *use_commit_type) {
 /**
  * @brief Attempt manual commit when assignment has been lost (#3217)
  */
-static void do_test_commit_on_lost (void) {
+static void do_test_commit_on_lost(void) {
         const char *bootstraps;
         rd_kafka_mock_cluster_t *mcluster;
         rd_kafka_conf_t *conf;
         rd_kafka_t *c;
         const char *groupid = "mygroup";
-        const char *topic = "test";
+        const char *topic   = "test";
         rd_kafka_resp_err_t err;
 
         SUB_TEST();
@@ -241,10 +248,8 @@ static void do_test_commit_on_lost (void) {
         rd_kafka_mock_coordinator_set(mcluster, "group", groupid, 1);
 
         /* Seed the topic with messages */
-        test_produce_msgs_easy_v(topic, 0, 0, 0, 100, 10,
-                                 "bootstrap.servers", bootstraps,
-                                 "batch.num.messages", "10",
-                                 NULL);
+        test_produce_msgs_easy_v(topic, 0, 0, 0, 100, 10, "bootstrap.servers",
+                                 bootstraps, "batch.num.messages", "10", NULL);
 
         test_conf_init(&conf, NULL, 30);
         test_conf_set(conf, "bootstrap.servers", bootstraps);
@@ -273,7 +278,7 @@ static void do_test_commit_on_lost (void) {
 
         TEST_SAY("Assignment is lost, committing\n");
         /* Perform manual commit */
-        err = rd_kafka_commit(c, NULL, 0/*sync*/);
+        err = rd_kafka_commit(c, NULL, 0 /*sync*/);
         TEST_SAY("commit() returned: %s\n", rd_kafka_err2name(err));
         TEST_ASSERT(err, "expected commit to fail");
 
@@ -289,18 +294,24 @@ static void do_test_commit_on_lost (void) {
 }
 
 
-int main_0106_cgrp_sess_timeout (int argc, char **argv) {
+int main_0106_cgrp_sess_timeout(int argc, char **argv) {
 
-        if (test_needs_auth()) {
-                TEST_SKIP("Mock cluster does not support SSL/SASL\n");
-                return 0;
-        }
+        TEST_SKIP_MOCK_CLUSTER(0);
 
         do_test_session_timeout("sync");
         do_test_session_timeout("async");
         do_test_session_timeout("auto");
 
-        do_test_commit_on_lost();
+        /* With KIP-848 session timeout is remote only.
+         * Partitions will stay assigned and fetchable
+         * when there's no communication with the
+         * coordinator, but the messages won't be
+         * committed.
+         * TODO: see if session timeout can be received by
+         * the broker and be enforced locally too. */
+        if (test_consumer_group_protocol_classic()) {
+                do_test_commit_on_lost();
+        }
 
         return 0;
 }

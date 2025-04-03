@@ -1,7 +1,7 @@
 /*
  * librdkafka - Apache Kafka C library
  *
- * Copyright (c) 2019, Magnus Edenhill
+ * Copyright (c) 2019-2022, Magnus Edenhill
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@
 
 
 
-int main_0009_mock_cluster (int argc, char **argv) {
+int main_0009_mock_cluster(int argc, char **argv) {
         const char *topic = test_mk_topic_name("0009_mock_cluster", 1);
         rd_kafka_mock_cluster_t *mcluster;
         rd_kafka_t *p, *c;
@@ -46,10 +46,7 @@ int main_0009_mock_cluster (int argc, char **argv) {
         const char *bootstraps;
         rd_kafka_topic_partition_list_t *parts;
 
-        if (test_needs_auth()) {
-                TEST_SKIP("Mock cluster does not support SSL/SASL\n");
-                return 0;
-        }
+        TEST_SKIP_MOCK_CLUSTER(0);
 
         mcluster = test_mock_cluster_new(3, &bootstraps);
 
@@ -67,14 +64,14 @@ int main_0009_mock_cluster (int argc, char **argv) {
         c = test_create_consumer(topic, NULL, conf, NULL);
 
         rkt = test_create_producer_topic(p, topic, NULL);
+        test_wait_topic_exists(p, topic, 5000);
 
         /* Produce */
-        test_produce_msgs(p, rkt, 0, RD_KAFKA_PARTITION_UA, 0, msgcnt,
-                          NULL, 0);
+        test_produce_msgs(p, rkt, 0, RD_KAFKA_PARTITION_UA, 0, msgcnt, NULL, 0);
 
         /* Produce tiny messages */
-        test_produce_msgs(p, rkt, 0, RD_KAFKA_PARTITION_UA, 0, msgcnt,
-                          "hello", 5);
+        test_produce_msgs(p, rkt, 0, RD_KAFKA_PARTITION_UA, 0, msgcnt, "hello",
+                          5);
 
         rd_kafka_topic_destroy(rkt);
 

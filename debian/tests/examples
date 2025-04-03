@@ -18,18 +18,18 @@ cd $WORKDIR
 sed -i 's;#include "rdkafka.h";#include <librdkafka/rdkafka.h>;' *.c
 sed -i 's;#include "rdkafkacpp.h";#include <librdkafka/rdkafkacpp.h>;' *.cpp
 
-echo "Info pkg-config (rdkafka): $(pkg-config --cflags --libs rdkafka)"
-echo "Info pkg-config (rdkafka++): $(pkg-config --cflags --libs rdkafka++)"
+echo "Info pkgconf (rdkafka): $(pkgconf --cflags --libs rdkafka)"
+echo "Info pkgconf (rdkafka++): $(pkgconf --cflags --libs rdkafka++)"
 
 # build C programs
 for src in *.c; do
 	echo "Build $src"
-	cc $src -o $src.out $(pkg-config --cflags --libs rdkafka)
+	cc $src -o $src.out $(pkgconf --cflags --libs rdkafka)
 done
 # build C++ programs
 for src in *.cpp; do
 	echo "Build $src"
-	c++ $src -o $src.out $(pkg-config --cflags --libs rdkafka++)
+	c++ $src -o $src.out $(pkgconf --cflags --libs rdkafka++)
 done
 # run them, check for "Usage" string in stderr
 for out in *.out; do
