@@ -8,21 +8,10 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+bindnow
 
 include /usr/share/dpkg/buildflags.mk
 
+execute_before_dh_auto_configure:
+	# ignore blhc false positives where tools are just listed
+	@echo 'blhc: ignore-line-regexp:  +LD +ld'
+	@echo 'blhc: ignore-line-regexp:  +CXX +g\+\+'
+
 %:
 	dh $@
-
-override_dh_auto_configure:
-	# There is no --runstatedir=/run in configure, so we do it manually here.
-	./configure \
-		--build $(DEB_BUILD_GNU_TYPE) \
-		--prefix=/usr \
-		--includedir=/usr/include \
-		--mandir=/usr/share/man \
-		--infodir=/usr/share/info \
-		--sysconfdir=/etc \
-		--localstatedir=/var \
-		--disable-silent-rules \
-		--libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
-		--libexecdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
-		--disable-maintainer-mode \
-		--disable-dependency-tracking

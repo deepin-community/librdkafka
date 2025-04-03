@@ -1,14 +1,42 @@
 librdkafka.so.1 librdkafka1 #MINVER#
 * Build-Depends-Package: librdkafka-dev
+ rd_kafka_AclBindingFilter_new@Base 1.9.0
+ rd_kafka_AclBinding_destroy@Base 1.9.0
+ rd_kafka_AclBinding_destroy_array@Base 1.9.0
+ rd_kafka_AclBinding_error@Base 1.9.0
+ rd_kafka_AclBinding_host@Base 1.9.0
+ rd_kafka_AclBinding_name@Base 1.9.0
+ rd_kafka_AclBinding_new@Base 1.9.0
+ rd_kafka_AclBinding_operation@Base 1.9.0
+ rd_kafka_AclBinding_permission_type@Base 1.9.0
+ rd_kafka_AclBinding_principal@Base 1.9.0
+ rd_kafka_AclBinding_resource_pattern_type@Base 1.9.0
+ rd_kafka_AclBinding_restype@Base 1.9.0
+ rd_kafka_AclOperation_name@Base 1.9.0
+ rd_kafka_AclPermissionType_name@Base 1.9.0
  rd_kafka_AdminOptions_destroy@Base 0.11.5
  rd_kafka_AdminOptions_new@Base 0.11.5
  rd_kafka_AdminOptions_set_broker@Base 0.11.5
+ rd_kafka_AdminOptions_set_include_authorized_operations@Base 2.3.0
+ rd_kafka_AdminOptions_set_isolation_level@Base 2.3.0
+ rd_kafka_AdminOptions_set_match_consumer_group_states@Base 2.0.0
+ rd_kafka_AdminOptions_set_match_consumer_group_types@Base 2.6.0
  rd_kafka_AdminOptions_set_opaque@Base 0.11.5
  rd_kafka_AdminOptions_set_operation_timeout@Base 0.11.5
  rd_kafka_AdminOptions_set_request_timeout@Base 0.11.5
+ rd_kafka_AdminOptions_set_require_stable_offsets@Base 2.0.0
  rd_kafka_AdminOptions_set_validate_only@Base 0.11.5
  rd_kafka_AlterConfigs@Base 0.11.5
  rd_kafka_AlterConfigs_result_resources@Base 0.11.5
+ rd_kafka_AlterConsumerGroupOffsets@Base 2.0.0
+ rd_kafka_AlterConsumerGroupOffsets_destroy@Base 2.0.0
+ rd_kafka_AlterConsumerGroupOffsets_destroy_array@Base 2.0.0
+ rd_kafka_AlterConsumerGroupOffsets_new@Base 2.0.0
+ rd_kafka_AlterConsumerGroupOffsets_result_groups@Base 2.0.0
+ rd_kafka_AlterUserScramCredentials@Base 2.2.0
+ rd_kafka_AlterUserScramCredentials_result_response_error@Base 2.2.0
+ rd_kafka_AlterUserScramCredentials_result_response_user@Base 2.2.0
+ rd_kafka_AlterUserScramCredentials_result_responses@Base 2.2.0
  rd_kafka_ConfigEntry_is_default@Base 0.11.5
  rd_kafka_ConfigEntry_is_read_only@Base 0.11.5
  rd_kafka_ConfigEntry_is_sensitive@Base 0.11.5
@@ -17,6 +45,7 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_ConfigEntry_source@Base 0.11.5
  rd_kafka_ConfigEntry_synonyms@Base 0.11.5
  rd_kafka_ConfigEntry_value@Base 0.11.5
+ rd_kafka_ConfigResource_add_incremental_config@Base 2.2.0
  rd_kafka_ConfigResource_configs@Base 0.11.5
  rd_kafka_ConfigResource_destroy@Base 0.11.5
  rd_kafka_ConfigResource_destroy_array@Base 0.11.5
@@ -27,10 +56,29 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_ConfigResource_set_config@Base 0.11.5
  rd_kafka_ConfigResource_type@Base 0.11.5
  rd_kafka_ConfigSource_name@Base 0.11.5
+ rd_kafka_ConsumerGroupDescription_authorized_operations@Base 2.3.0
+ rd_kafka_ConsumerGroupDescription_coordinator@Base 2.0.0
+ rd_kafka_ConsumerGroupDescription_error@Base 2.0.0
+ rd_kafka_ConsumerGroupDescription_group_id@Base 2.0.0
+ rd_kafka_ConsumerGroupDescription_is_simple_consumer_group@Base 2.0.0
+ rd_kafka_ConsumerGroupDescription_member@Base 2.0.0
+ rd_kafka_ConsumerGroupDescription_member_count@Base 2.0.0
+ rd_kafka_ConsumerGroupDescription_partition_assignor@Base 2.0.0
+ rd_kafka_ConsumerGroupDescription_state@Base 2.0.0
+ rd_kafka_ConsumerGroupListing_group_id@Base 2.0.0
+ rd_kafka_ConsumerGroupListing_is_simple_consumer_group@Base 2.0.0
+ rd_kafka_ConsumerGroupListing_state@Base 2.0.0
+ rd_kafka_ConsumerGroupListing_type@Base 2.6.0
+ rd_kafka_CreateAcls@Base 1.9.0
+ rd_kafka_CreateAcls_result_acls@Base 1.9.0
  rd_kafka_CreatePartitions@Base 0.11.5
  rd_kafka_CreatePartitions_result_topics@Base 0.11.5
  rd_kafka_CreateTopics@Base 0.11.5
  rd_kafka_CreateTopics_result_topics@Base 0.11.5
+ rd_kafka_DeleteAcls@Base 1.9.0
+ rd_kafka_DeleteAcls_result_response_error@Base 1.9.0
+ rd_kafka_DeleteAcls_result_response_matching_acls@Base 1.9.0
+ rd_kafka_DeleteAcls_result_responses@Base 1.9.0
  rd_kafka_DeleteConsumerGroupOffsets@Base 1.6.0
  rd_kafka_DeleteConsumerGroupOffsets_destroy@Base 1.6.0
  rd_kafka_DeleteConsumerGroupOffsets_destroy_array@Base 1.6.0
@@ -51,8 +99,45 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_DeleteTopic_new@Base 0.11.5
  rd_kafka_DeleteTopics@Base 0.11.5
  rd_kafka_DeleteTopics_result_topics@Base 0.11.5
+ rd_kafka_DescribeAcls@Base 1.9.0
+ rd_kafka_DescribeAcls_result_acls@Base 1.9.0
+ rd_kafka_DescribeCluster@Base 2.3.0
+ rd_kafka_DescribeCluster_result_authorized_operations@Base 2.3.0
+ rd_kafka_DescribeCluster_result_cluster_id@Base 2.3.0
+ rd_kafka_DescribeCluster_result_controller@Base 2.3.0
+ rd_kafka_DescribeCluster_result_nodes@Base 2.3.0
  rd_kafka_DescribeConfigs@Base 0.11.5
  rd_kafka_DescribeConfigs_result_resources@Base 0.11.5
+ rd_kafka_DescribeConsumerGroups@Base 2.0.0
+ rd_kafka_DescribeConsumerGroups_result_groups@Base 2.0.0
+ rd_kafka_DescribeTopics@Base 2.3.0
+ rd_kafka_DescribeTopics_result_topics@Base 2.3.0
+ rd_kafka_DescribeUserScramCredentials@Base 2.2.0
+ rd_kafka_DescribeUserScramCredentials_result_descriptions@Base 2.2.0
+ rd_kafka_ElectLeaders@Base 2.6.0
+ rd_kafka_ElectLeaders_destroy@Base 2.6.0
+ rd_kafka_ElectLeaders_new@Base 2.6.0
+ rd_kafka_ElectLeaders_result_partitions@Base 2.6.0
+ rd_kafka_IncrementalAlterConfigs@Base 2.2.0
+ rd_kafka_IncrementalAlterConfigs_result_resources@Base 2.2.0
+ rd_kafka_ListConsumerGroupOffsets@Base 2.0.0
+ rd_kafka_ListConsumerGroupOffsets_destroy@Base 2.0.0
+ rd_kafka_ListConsumerGroupOffsets_destroy_array@Base 2.0.0
+ rd_kafka_ListConsumerGroupOffsets_new@Base 2.0.0
+ rd_kafka_ListConsumerGroupOffsets_result_groups@Base 2.0.0
+ rd_kafka_ListConsumerGroups@Base 2.0.0
+ rd_kafka_ListConsumerGroups_result_errors@Base 2.0.0
+ rd_kafka_ListConsumerGroups_result_valid@Base 2.0.0
+ rd_kafka_ListOffsets@Base 2.3.0
+ rd_kafka_ListOffsetsResultInfo_timestamp@Base 2.3.0
+ rd_kafka_ListOffsetsResultInfo_topic_partition@Base 2.3.0
+ rd_kafka_ListOffsets_result_infos@Base 2.3.0
+ rd_kafka_MemberAssignment_partitions@Base 2.0.0
+ rd_kafka_MemberDescription_assignment@Base 2.0.0
+ rd_kafka_MemberDescription_client_id@Base 2.0.0
+ rd_kafka_MemberDescription_consumer_id@Base 2.0.0
+ rd_kafka_MemberDescription_group_instance_id@Base 2.0.0
+ rd_kafka_MemberDescription_host@Base 2.0.0
  rd_kafka_NewPartitions_destroy@Base 0.11.5
  rd_kafka_NewPartitions_destroy_array@Base 0.11.5
  rd_kafka_NewPartitions_new@Base 0.11.5
@@ -62,8 +147,42 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_NewTopic_new@Base 0.11.5
  rd_kafka_NewTopic_set_config@Base 0.11.5
  rd_kafka_NewTopic_set_replica_assignment@Base 0.11.5
+ rd_kafka_Node_host@Base 2.0.0
+ rd_kafka_Node_id@Base 2.0.0
+ rd_kafka_Node_port@Base 2.0.0
+ rd_kafka_Node_rack@Base 2.3.0
+ rd_kafka_ResourcePatternType_name@Base 1.9.0
  rd_kafka_ResourceType_name@Base 0.11.5
+ rd_kafka_ScramCredentialInfo_iterations@Base 2.2.0
+ rd_kafka_ScramCredentialInfo_mechanism@Base 2.2.0
+ rd_kafka_TopicCollection_destroy@Base 2.3.0
+ rd_kafka_TopicCollection_of_topic_names@Base 2.3.0
+ rd_kafka_TopicDescription_authorized_operations@Base 2.3.0
+ rd_kafka_TopicDescription_error@Base 2.3.0
+ rd_kafka_TopicDescription_is_internal@Base 2.3.0
+ rd_kafka_TopicDescription_name@Base 2.3.0
+ rd_kafka_TopicDescription_partitions@Base 2.3.0
+ rd_kafka_TopicDescription_topic_id@Base 2.3.0
+ rd_kafka_TopicPartitionInfo_isr@Base 2.3.0
+ rd_kafka_TopicPartitionInfo_leader@Base 2.3.0
+ rd_kafka_TopicPartitionInfo_partition@Base 2.3.0
+ rd_kafka_TopicPartitionInfo_replicas@Base 2.3.0
+ rd_kafka_UserScramCredentialAlteration_destroy@Base 2.2.0
+ rd_kafka_UserScramCredentialAlteration_destroy_array@Base 2.2.0
+ rd_kafka_UserScramCredentialDeletion_new@Base 2.2.0
+ rd_kafka_UserScramCredentialUpsertion_new@Base 2.2.0
+ rd_kafka_UserScramCredentialsDescription_error@Base 2.2.0
+ rd_kafka_UserScramCredentialsDescription_scramcredentialinfo@Base 2.2.0
+ rd_kafka_UserScramCredentialsDescription_scramcredentialinfo_count@Base 2.2.0
+ rd_kafka_UserScramCredentialsDescription_user@Base 2.2.0
+ rd_kafka_Uuid_base64str@Base 2.3.0
+ rd_kafka_Uuid_copy@Base 2.3.0
+ rd_kafka_Uuid_destroy@Base 2.3.0
+ rd_kafka_Uuid_least_significant_bits@Base 2.3.0
+ rd_kafka_Uuid_most_significant_bits@Base 2.3.0
+ rd_kafka_Uuid_new@Base 2.3.0
  rd_kafka_abort_transaction@Base 1.4.2
+ rd_kafka_acl_result_error@Base 1.9.0
  rd_kafka_assign@Base 0.9.0
  rd_kafka_assignment@Base 0.9.0
  rd_kafka_assignment_lost@Base 1.6.0
@@ -81,6 +200,7 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_conf_dump_free@Base 0.8.3
  rd_kafka_conf_dup@Base 0.8.3
  rd_kafka_conf_dup_filter@Base 0.11.0
+ rd_kafka_conf_enable_sasl_queue@Base 1.9.0
  rd_kafka_conf_get@Base 0.9.0
  rd_kafka_conf_get_default_topic_conf@Base 1.6.0
  rd_kafka_conf_interceptor_add_on_conf_destroy@Base 0.11.0
@@ -106,6 +226,7 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_conf_set_opaque@Base 0.8.0
  rd_kafka_conf_set_open_cb@Base 0.8.4
  rd_kafka_conf_set_rebalance_cb@Base 0.9.0
+ rd_kafka_conf_set_resolve_cb@Base 2.0.0
  rd_kafka_conf_set_socket_cb@Base 0.8.4
  rd_kafka_conf_set_ssl_cert@Base 1.2.1
  rd_kafka_conf_set_ssl_cert_verify_cb@Base 1.2.1
@@ -121,12 +242,22 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_consume_start_queue@Base 0.8.4
  rd_kafka_consume_stop@Base 0.8.0
  rd_kafka_consumer_close@Base 0.9.0
+ rd_kafka_consumer_close_queue@Base 1.9.0
+ rd_kafka_consumer_closed@Base 1.9.0
  rd_kafka_consumer_group_metadata@Base 1.4.2
  rd_kafka_consumer_group_metadata_destroy@Base 1.4.2
+ rd_kafka_consumer_group_metadata_generation_id@Base 2.8.0
+ rd_kafka_consumer_group_metadata_group_id@Base 2.8.0
+ rd_kafka_consumer_group_metadata_group_instance_id@Base 2.8.0
+ rd_kafka_consumer_group_metadata_member_id@Base 2.4.0
  rd_kafka_consumer_group_metadata_new@Base 1.4.2
  rd_kafka_consumer_group_metadata_new_with_genid@Base 1.6.0
  rd_kafka_consumer_group_metadata_read@Base 1.4.2
  rd_kafka_consumer_group_metadata_write@Base 1.4.2
+ rd_kafka_consumer_group_state_code@Base 2.0.0
+ rd_kafka_consumer_group_state_name@Base 2.0.0
+ rd_kafka_consumer_group_type_code@Base 2.6.0
+ rd_kafka_consumer_group_type_name@Base 2.6.0
  rd_kafka_consumer_poll@Base 0.9.0
  rd_kafka_controllerid@Base 0.11.5
  rd_kafka_default_topic_conf_dup@Base 0.11.4
@@ -146,13 +277,27 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_error_string@Base 1.4.2
  rd_kafka_error_txn_requires_abort@Base 1.4.2
  rd_kafka_event_AlterConfigs_result@Base 0.11.5
+ rd_kafka_event_AlterConsumerGroupOffsets_result@Base 2.0.0
+ rd_kafka_event_AlterUserScramCredentials_result@Base 2.2.0
+ rd_kafka_event_CreateAcls_result@Base 1.9.0
  rd_kafka_event_CreatePartitions_result@Base 0.11.5
  rd_kafka_event_CreateTopics_result@Base 0.11.5
+ rd_kafka_event_DeleteAcls_result@Base 1.9.0
  rd_kafka_event_DeleteConsumerGroupOffsets_result@Base 1.6.0
  rd_kafka_event_DeleteGroups_result@Base 1.6.0
  rd_kafka_event_DeleteRecords_result@Base 1.6.0
  rd_kafka_event_DeleteTopics_result@Base 0.11.5
+ rd_kafka_event_DescribeAcls_result@Base 1.9.0
+ rd_kafka_event_DescribeCluster_result@Base 2.3.0
  rd_kafka_event_DescribeConfigs_result@Base 0.11.5
+ rd_kafka_event_DescribeConsumerGroups_result@Base 2.0.0
+ rd_kafka_event_DescribeTopics_result@Base 2.3.0
+ rd_kafka_event_DescribeUserScramCredentials_result@Base 2.2.0
+ rd_kafka_event_ElectLeaders_result@Base 2.6.0
+ rd_kafka_event_IncrementalAlterConfigs_result@Base 2.2.0
+ rd_kafka_event_ListConsumerGroupOffsets_result@Base 2.0.0
+ rd_kafka_event_ListConsumerGroups_result@Base 2.0.0
+ rd_kafka_event_ListOffsets_result@Base 2.3.0
  rd_kafka_event_config_string@Base 1.2.1
  rd_kafka_event_debug_contexts@Base 1.5.0
  rd_kafka_event_destroy@Base 0.9.2
@@ -192,6 +337,7 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_incremental_unassign@Base 1.6.0
  rd_kafka_init_transactions@Base 1.4.2
  rd_kafka_interceptor_add_on_acknowledgement@Base 0.11.0
+ rd_kafka_interceptor_add_on_broker_state_change@Base 2.0.0
  rd_kafka_interceptor_add_on_commit@Base 0.11.0
  rd_kafka_interceptor_add_on_consume@Base 0.11.0
  rd_kafka_interceptor_add_on_destroy@Base 0.11.0
@@ -214,28 +360,49 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_message_errstr@Base 1.5.0
  rd_kafka_message_headers@Base 0.11.4
  rd_kafka_message_latency@Base 0.11.0
+ rd_kafka_message_leader_epoch@Base 2.1.0
+ rd_kafka_message_produce_errstr@Base 2.4.0
  rd_kafka_message_set_headers@Base 0.11.4
  rd_kafka_message_status@Base 1.2.1
  rd_kafka_message_timestamp@Base 0.9.1
  rd_kafka_metadata@Base 0.8.4
  rd_kafka_metadata_destroy@Base 0.8.4
+ rd_kafka_mock_broker_error_stack_cnt@Base 2.0.0
  rd_kafka_mock_broker_push_request_error_rtts@Base 1.8.0
  rd_kafka_mock_broker_set_down@Base 1.4.2
  rd_kafka_mock_broker_set_rack@Base 1.3.0
  rd_kafka_mock_broker_set_rtt@Base 1.5.0
  rd_kafka_mock_broker_set_up@Base 1.4.2
+ rd_kafka_mock_cgrp_consumer_target_assignment@Base 2.8.0
+ rd_kafka_mock_cgrp_consumer_target_assignment_destroy@Base 2.8.0
+ rd_kafka_mock_cgrp_consumer_target_assignment_new@Base 2.8.0
  rd_kafka_mock_clear_request_errors@Base 1.6.0
+ rd_kafka_mock_clear_requests@Base 2.3.0
  rd_kafka_mock_cluster_bootstraps@Base 1.3.0
  rd_kafka_mock_cluster_destroy@Base 1.3.0
  rd_kafka_mock_cluster_handle@Base 1.3.0
  rd_kafka_mock_cluster_new@Base 1.3.0
  rd_kafka_mock_coordinator_set@Base 1.4.2
+ rd_kafka_mock_get_requests@Base 2.3.0
+ rd_kafka_mock_group_initial_rebalance_delay_ms@Base 2.6.0
+ rd_kafka_mock_partition_push_leader_response@Base 2.4.0
  rd_kafka_mock_partition_set_follower@Base 1.3.0
  rd_kafka_mock_partition_set_follower_wmarks@Base 1.3.0
  rd_kafka_mock_partition_set_leader@Base 1.3.0
  rd_kafka_mock_push_request_errors@Base 1.3.0
  rd_kafka_mock_push_request_errors_array@Base 1.6.0
+ rd_kafka_mock_request_api_key@Base 2.3.0
+ rd_kafka_mock_request_destroy@Base 2.3.0
+ rd_kafka_mock_request_destroy_array@Base 2.4.0
+ rd_kafka_mock_request_id@Base 2.3.0
+ rd_kafka_mock_request_timestamp@Base 2.3.0
  rd_kafka_mock_set_apiversion@Base 1.4.2
+ rd_kafka_mock_set_group_consumer_heartbeat_interval_ms@Base 2.8.0
+ rd_kafka_mock_set_group_consumer_session_timeout_ms@Base 2.8.0
+ rd_kafka_mock_start_request_tracking@Base 2.3.0
+ rd_kafka_mock_stop_request_tracking@Base 2.3.0
+ rd_kafka_mock_telemetry_set_push_interval@Base 2.5.0
+ rd_kafka_mock_telemetry_set_requested_metrics@Base 2.5.0
  rd_kafka_mock_topic_create@Base 1.4.2
  rd_kafka_mock_topic_set_error@Base 1.3.0
  rd_kafka_msg_partitioner_consistent@Base 0.9.0
@@ -250,6 +417,7 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_oauthbearer_set_token@Base 1.2.1
  rd_kafka_oauthbearer_set_token_failure@Base 1.2.1
  rd_kafka_offset_store@Base 0.8.3
+ rd_kafka_offset_store_message@Base 2.1.0
  rd_kafka_offsets_for_times@Base 0.9.4
  rd_kafka_offsets_store@Base 0.11.0
  rd_kafka_opaque@Base 0.8.4
@@ -271,6 +439,7 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_queue_get_consumer@Base 0.9.2
  rd_kafka_queue_get_main@Base 0.9.2
  rd_kafka_queue_get_partition@Base 0.9.4
+ rd_kafka_queue_get_sasl@Base 1.9.0
  rd_kafka_queue_io_event_enable@Base 0.9.2
  rd_kafka_queue_length@Base 0.9.2
  rd_kafka_queue_new@Base 0.8.4
@@ -279,6 +448,8 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_queue_yield@Base 1.6.0
  rd_kafka_rebalance_protocol@Base 1.6.0
  rd_kafka_resume_partitions@Base 0.9.1
+ rd_kafka_sasl_background_callbacks_enable@Base 1.9.0
+ rd_kafka_sasl_set_credentials@Base 2.0.0
  rd_kafka_seek@Base 0.9.0
  rd_kafka_seek_partitions@Base 1.6.0
  rd_kafka_send_offsets_to_transaction@Base 1.4.2
@@ -304,6 +475,7 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_topic_opaque@Base 0.9.0
  rd_kafka_topic_partition_available@Base 0.8.0
  rd_kafka_topic_partition_destroy@Base 0.9.2
+ rd_kafka_topic_partition_get_leader_epoch@Base 2.1.0
  rd_kafka_topic_partition_list_add@Base 0.9.0
  rd_kafka_topic_partition_list_add_range@Base 0.9.0
  rd_kafka_topic_partition_list_copy@Base 0.9.0
@@ -314,6 +486,9 @@ librdkafka.so.1 librdkafka1 #MINVER#
  rd_kafka_topic_partition_list_new@Base 0.9.0
  rd_kafka_topic_partition_list_set_offset@Base 0.9.1
  rd_kafka_topic_partition_list_sort@Base 0.9.4
+ rd_kafka_topic_partition_result_error@Base 2.6.0
+ rd_kafka_topic_partition_result_partition@Base 2.6.0
+ rd_kafka_topic_partition_set_leader_epoch@Base 2.1.0
  rd_kafka_topic_result_error@Base 0.11.5
  rd_kafka_topic_result_error_string@Base 0.11.5
  rd_kafka_topic_result_name@Base 0.11.5

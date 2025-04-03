@@ -1,8 +1,88 @@
-librdkafka (1.8.0-1deepin0) unstable; urgency=medium
+librdkafka (2.8.0-1) unstable; urgency=medium
 
-  * No source change upload against GCC 12.
+  * New upstream release.
+    - Update librdkafka1.symbols to add new symbols.
 
- -- Tianyu Chen <sweetyfish@deepin.org>  Fri, 20 Sep 2024 12:11:29 +0800
+ -- Faidon Liambotis <paravoid@debian.org>  Sun, 16 Feb 2025 14:45:47 +0200
+
+librdkafka (2.6.0-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Update librdkafka1.symbols to add new symbols.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Sat, 12 Oct 2024 12:07:11 +0300
+
+librdkafka (2.5.3-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Mon, 02 Sep 2024 12:43:19 +0300
+
+librdkafka (2.5.0-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Update librdkafka1.symbols to add new symbols.
+  * Build-Depend on libcurl4-openssl-dev, required for SASL OAUTHBEARER OIDC
+    support.
+  * Build-Depend on pkgconf, which results in build-dependent libraries to be
+    listed in Requires.private (instead of Libs.private) in the shipped .pc.
+  * Add all (necessary) Build-Depends as Depends of the -dev package. They
+    were already required for static linking, but are now required for shared
+    linking as well, when "pkgconf --cflags" is being used.
+  * Use "pkgconf" instead of the deprecated "pkg-config" in autopkgtests.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Tue, 13 Aug 2024 14:53:59 +0300
+
+librdkafka (2.4.0-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Update librdkafka1.symbols to add new symbols.
+  * Bump Standards-Version to 4.7.0, no changes needed.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Tue, 21 May 2024 16:53:19 +0300
+
+librdkafka (2.3.0-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Update librdkafka1.symbols to add new symbols.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Fri, 27 Oct 2023 17:10:33 +0300
+
+librdkafka (2.2.0-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Update librdkafka1.symbols to add new (v2.1.0 and v2.2.0) symbols.
+  * Update d/copyright with new copyright author for 2023.
+  * Remove NEWS file with very old (2017) entries.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Fri, 14 Jul 2023 03:45:47 +0300
+
+librdkafka (2.0.2-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Update librdkafka1.symbols to add new (2.0.0) symbols.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Thu, 09 Feb 2023 04:22:10 +0200
+
+librdkafka (1.9.2-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Update librdkafka1.symbols to add new (as of v1.9.0) symbols.
+  * Upstream build system now generates an librdkafka-static.a that is
+    identical to librdkafka.a. Add it to debian/no-installed.
+  * Remove override_dh_auto_configure and the handcrafted ./configure; mklove
+    now supports runstatedir, and therefore the automatic configure line
+    works.
+  * Add a patch (makefile-bashism-pr4147) to fix a bashism in the main
+    Makefile, which resulted into the build tree becoming dirty.
+  * Multiple debian/copyright updates:
+    - Add entries for files that were undocumented before, and files
+      introduced in this newer upstream release.
+    - Update copyright years.
+    - Remove license MIT, as a duplicate of Expat, already in the file.
+  * Bump Standards-Version to 4.6.2, no changes needed.
+
+ -- Faidon Liambotis <paravoid@debian.org>  Thu, 12 Jan 2023 04:13:14 +0200
 
 librdkafka (1.8.0-1) unstable; urgency=medium
 

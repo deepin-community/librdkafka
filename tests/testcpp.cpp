@@ -1,7 +1,7 @@
 /*
  * librdkafka - Apache Kafka C library
  *
- * Copyright (c) 2012-2015, Magnus Edenhill
+ * Copyright (c) 2012-2022, Magnus Edenhill
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,10 +39,10 @@ namespace Test {
  * @brief Read config file and populate config objects.
  * @returns 0 on success or -1 on error
  */
-static int read_config_file (std::string path,
-                             RdKafka::Conf *conf,
-                             RdKafka::Conf *topic_conf,
-                             int *timeoutp) {
+static int read_config_file(std::string path,
+                            RdKafka::Conf *conf,
+                            RdKafka::Conf *topic_conf,
+                            int *timeoutp) {
   std::ifstream input(path.c_str(), std::ifstream::in);
 
   if (!input)
@@ -54,8 +54,7 @@ static int read_config_file (std::string path,
     line.erase(0, line.find_first_not_of("\t "));
     line.erase(line.find_last_not_of("\t ") + 1);
 
-    if (line.length() == 0 ||
-        line.substr(0, 1) == "#")
+    if (line.length() == 0 || line.substr(0, 1) == "#")
       continue;
 
     size_t f = line.find("=");
@@ -65,7 +64,7 @@ static int read_config_file (std::string path,
     }
 
     std::string n = line.substr(0, f);
-    std::string v = line.substr(f+1);
+    std::string v = line.substr(f + 1);
     std::string errstr;
 
     if (test_set_special_conf(n.c_str(), v.c_str(), timeoutp))
@@ -87,18 +86,15 @@ static int read_config_file (std::string path,
   return 0;
 }
 
-void conf_init (RdKafka::Conf **conf,
-                RdKafka::Conf **topic_conf,
-                int timeout) {
-  const char *tmp;
+void conf_init(RdKafka::Conf **conf, RdKafka::Conf **topic_conf, int timeout) {
+  const char *tmp, *group_protocol;
 
   if (conf)
     *conf = RdKafka::Conf::create(RdKafka::Conf::CONF_GLOBAL);
   if (topic_conf)
     *topic_conf = RdKafka::Conf::create(RdKafka::Conf::CONF_TOPIC);
 
-  read_config_file(test_conf_get_path(),
-                   conf ? *conf : NULL,
+  read_config_file(test_conf_get_path(), conf ? *conf : NULL,
                    topic_conf ? *topic_conf : NULL, &timeout);
 
   std::string errstr;
@@ -111,23 +107,25 @@ void conf_init (RdKafka::Conf **conf,
       Test::Fail("TEST_DEBUG failed: " + errstr);
   }
 
+  if (*conf && (group_protocol = test_consumer_group_protocol())) {
+    if ((*conf)->set("group.protocol", group_protocol, errstr) !=
+        RdKafka::Conf::CONF_OK)
+      Test::Fail("set group.protocol failed: " + errstr);
+  }
 
   if (timeout)
     test_timeout_set(timeout);
 }
 
 
-  void DeliveryReportCb::dr_cb (RdKafka::Message &msg) {
-    if (msg.err() != RdKafka::ERR_NO_ERROR)
-      Test::Fail(tostr() << "Delivery failed to " <<
-                 msg.topic_name() << " [" << msg.partition() << "]: " <<
-                 msg.errstr());
-    else
-      Test::Say(3, tostr() << "Delivered to " <<
-                msg.topic_name() << " [" << msg.partition() << "] @ " <<
-                msg.offset() << " (timestamp " << msg.timestamp().timestamp <<
-                ")\n");
-
-
-  }
-};
+void DeliveryReportCb::dr_cb(RdKafka::Message &msg) {
+  if (msg.err() != RdKafka::ERR_NO_ERROR)
+    Test::Fail(tostr() << "Delivery failed to " << msg.topic_name() << " ["
+                       << msg.partition() << "]: " << msg.errstr());
+  else
+    Test::Say(3, tostr() << "Delivered to " << msg.topic_name() << " ["
+                         << msg.partition() << "] @ " << msg.offset()
+                         << " (timestamp " << msg.timestamp().timestamp
+                         << ")\n");
+}
+};  // namespace Test

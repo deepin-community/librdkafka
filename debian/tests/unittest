@@ -18,6 +18,6 @@ int main(int argc, char **argv)
 EOF
 
 cc -o $AUTOPKGTEST_TMP/testprog $AUTOPKGTEST_TMP/testprog.c \
-   $(pkg-config --cflags --libs rdkafka)
+   $(pkgconf --cflags --libs rdkafka)
 
 $AUTOPKGTEST_TMP/testprog
